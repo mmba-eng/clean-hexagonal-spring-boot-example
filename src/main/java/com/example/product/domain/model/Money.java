@@ -38,7 +38,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return amount.compareTo(money.amount) == 0 && currency.equals(money.currency);
+        return amount.compareTo(money.amount) == 0 && Objects.equals(currency, money.currency);
     }
 
     @Override

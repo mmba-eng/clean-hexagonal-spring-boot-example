@@ -5,6 +5,7 @@ import com.example.product.application.dto.ProductResponse;
 import com.example.product.application.port.in.CreateProductUseCase;
 import com.example.product.application.port.in.GetProductQuery;
 import com.example.product.application.port.out.ProductRepositoryPort;
+import com.example.product.domain.exception.ProductNotFoundException;
 import com.example.product.domain.model.Money;
 import com.example.product.domain.model.Product;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class ProductService implements CreateProductUseCase, GetProductQuery {
     @Override
     public ProductResponse getProduct(Long id) {
         Product product = productRepositoryPort.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
         
         return mapToResponse(product);
     }
